@@ -22,6 +22,7 @@ public class TGFTTube4 extends ApplicationAdapter {
 	Array<Sprite> arsprTtube,arsprBtube;
 	long movetime,movetime2;
 	int nspawnTime;
+	float fTtubey;
 
 	@Override
 	public void create () {
@@ -43,15 +44,16 @@ public class TGFTTube4 extends ApplicationAdapter {
 	private void spawnTtube(){
 		Sprite sprTtube = new Sprite(txTtube);
 		sprTtube.setX(750);
-		sprTtube.setY(MathUtils.random(300-200) + 200);
+		sprTtube.setY(MathUtils.random(400-200) + 200);
 		arsprTtube.add(sprTtube);
+		fTtubey= sprTtube.getY()-150;
 		movetime= TimeUtils.nanoTime();
 
 	}
 	private void spawnBtube(){
 		Sprite sprBtube = new Sprite(txBtube);
 		sprBtube.setX(750);
-		sprBtube.setY(300);
+		sprBtube.setY(fTtubey-300);
 		arsprBtube.add(sprBtube);
 		movetime2=TimeUtils.nanoTime();
 
