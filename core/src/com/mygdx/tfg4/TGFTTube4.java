@@ -20,7 +20,7 @@ public class TGFTTube4 extends ApplicationAdapter {
 	Sprite sprTtube,sprBtube;
 	OrthographicCamera camera;
 	Array<Sprite> arsprTtube,arsprBtube;
-	long movetime;
+	long movetime,movetime2;
 	int nspawnTime;
 
 	@Override
@@ -43,12 +43,17 @@ public class TGFTTube4 extends ApplicationAdapter {
 	private void spawnTtube(){
 		Sprite sprTtube = new Sprite(txTtube);
 		sprTtube.setX(750);
-		sprTtube.setY(MathUtils.random(0, 800 -100));
+		sprTtube.setY(MathUtils.random(300-200) + 200);
 		arsprTtube.add(sprTtube);
 		movetime= TimeUtils.nanoTime();
 
 	}
 	private void spawnBtube(){
+		Sprite sprBtube = new Sprite(txBtube);
+		sprBtube.setX(750);
+		sprBtube.setY(300);
+		arsprBtube.add(sprBtube);
+		movetime2=TimeUtils.nanoTime();
 
 	}
 
@@ -62,6 +67,9 @@ public class TGFTTube4 extends ApplicationAdapter {
 		for (Sprite sprTtube : arsprTtube) {
 			batch.draw(sprTtube, sprTtube.getX(), sprTtube.getY());
 		}
+		for (Sprite sprBtube : arsprBtube){
+			batch.draw(sprBtube,sprBtube.getX(),sprBtube.getY());
+		}
 			batch.end();
 		if(TimeUtils.nanoTime()-movetime>1000000*nspawnTime)spawnTtube();
 		Iterator<Sprite> iter=arsprTtube.iterator();
@@ -69,6 +77,11 @@ public class TGFTTube4 extends ApplicationAdapter {
 			Sprite sprTtube = iter.next();
 			sprTtube.setX(sprTtube.getX()- (150)* Gdx.graphics.getDeltaTime());
 
+		}if(TimeUtils.nanoTime()-movetime2>1000000*nspawnTime)spawnBtube();
+		Iterator<Sprite> iters=arsprBtube.iterator();
+		while(iters.hasNext()){
+			Sprite sprBtube=iters.next();
+			sprBtube.setX(sprBtube.getX()-(150)*Gdx.graphics.getDeltaTime());
 		}
 		}
 }
